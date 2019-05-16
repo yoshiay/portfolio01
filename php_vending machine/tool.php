@@ -1,9 +1,9 @@
 <?php
 
-$host   = 'localhost'; // データベースのホスト名又はIPアドレス
-$user   = 'codecamp25631';  // MySQLのユーザ名
-$passwd = 'XRMPISCA';    // MySQLのパスワード
-$dbname = 'codecamp25631';
+$host   = ''; 
+$user   = '';  
+$passwd = '';    
+$dbname = '';
 $drink_name = '';
 $price ='';
 $quantity ='';
