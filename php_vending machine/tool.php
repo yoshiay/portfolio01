@@ -29,28 +29,28 @@ if($link = mysqli_connect($host, $user, $passwd, $dbname)){
         $date = date('Y-m-d H:i:s');
         if($sql_kind === 'insert'){
             if(isset($_POST['drink_name'])){
-                $drink_name = $_POST['drink_name'];
+                $drink_name = htmlspecialchars($_POST['drink_name'], ENT_QUOTES, 'UTF-8');
             }
             if(isset($_POST['price'])){
-                $price = $_POST['price'];
+                $price = htmlspecialchars($_POST['price'], ENT_QUOTES, 'UTF-8');
             }
             if(isset($_POST['quantity'])){
-                $quantity = $_POST['quantity'];
+                $quantity = htmlspecialchars($_POST['quantity'], ENT_QUOTES, 'UTF-8');
             }
             if(isset($_POST['status'])){
-                $status = $_POST['status'];
+                $status = htmlspecialchars($_POST['status'], ENT_QUOTES, 'UTF-8');
             }
             if($drink_name === ''){
                 $err_msg[] = '名前を入力して下さい';
             }
             if($price === ''){
                 $err_msg[] = '値段を入力して下さい';
-            }else if(preg_match("/^([0-9]+[0-9]*)$/",$price) !== 1){
+            }else if(preg_match("/^([1-9]+[0-9]*)$/",$price) !== 1){
                 $err_msg[] = '値段を半角数字で入力して下さい';
             }
             if($quantity === '' ){
                 $err_msg[] = '数量を入力して下さい';
-            }else if(preg_match("/^([1-9]+[0-9]*)$/",$quantity) !== 1){
+            }else if(preg_match("/^([0-9]+[0-9]*)$/",$quantity) !== 1){
                 $err_msg[] = '数量を半角数字で入力して下さい';
             }
             if (is_uploaded_file($_FILES['file']['tmp_name'])) {
@@ -96,11 +96,10 @@ if($link = mysqli_connect($host, $user, $passwd, $dbname)){
             }
         }else if($sql_kind === 'update_stock'){
             if(isset($_POST['new_quantity'])){
-                $new_quantity = $_POST['new_quantity'];
+                $new_quantity = htmlspecialchars($_POST['new_quantity'], ENT_QUOTES, 'UTF-8');
             }
-            print $new_quantity;
             if(isset($_POST['drink_id'])){
-                $drink_id = $_POST['drink_id'];
+                $drink_id = htmlspecialchars($_POST['drink_id'], ENT_QUOTES, 'UTF-8');
             }
             if($new_quantity === ''){
                 $err_mag[] = '変更数量を入力して下さい';
@@ -121,9 +120,9 @@ if($link = mysqli_connect($host, $user, $passwd, $dbname)){
         
         }else if($sql_kind === 'update_status'){
             if(isset($_POST['status'])){
-                $status = $_POST['status'];
+                $status = htmlspecialchars($_POST['status'], ENT_QUOTES, 'UTF-8');
             }
-            if($status === '公開'){
+            if($status === '非公開→公開'){
                 $status = 1;
             }else{
                 $status = 0;
@@ -133,7 +132,7 @@ if($link = mysqli_connect($host, $user, $passwd, $dbname)){
             }
         
             if(isset($_POST['drink_id'])){
-                $drink_id = $_POST['drink_id'];
+                $drink_id = htmlspecialchars($_POST['drink_id'], ENT_QUOTES, 'UTF-8');
             }
             if($drink_id === ''){
             $err_msg[] = '$drink_id,エラー';
@@ -229,9 +228,9 @@ foreach($data as $value){
             <td>
                 <form action="tool.php" method="post">
                 <?php if($value['status'] === '1'){?>
-                <input type='submit' name='status' value='非公開' style="width:120px">
+                <input type='submit' name='status' value='公開→非公開' style="width:140px">
                 <?php }else{ ?>
-                <input type='submit' name='status' value='公開' style="width:120px">        
+                <input type='submit' name='status' value='非公開→公開' style="width:140px">        
                 <?php }?>
                 <input type="hidden" name="sql_kind" value="update_status">
                 <input type="hidden" name="drink_id" value="<?php print $value['drink_id'];?>">

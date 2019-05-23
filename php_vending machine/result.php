@@ -24,7 +24,6 @@ if($link = mysqli_connect($host, $user, $passwd, $dbname)){
         $price = $_POST['price'];
         }
         $date = date('Y-m-d H:i:s');
-        $date = date('Y-m-d H:i:s');
         if($order === ''){
             $err_msg[] = '商品を選択して下さい';
         }
@@ -89,17 +88,11 @@ if($link = mysqli_connect($host, $user, $passwd, $dbname)){
    <title>自動販売機システム</title>
 </head>
 <body>
-    <?php 
-    foreach($err_msg as $value){
-     print $value.'<br>';   
-           
-    }?>
- 
     <h1>自動販売機結果</h1>
     <img src="./images/<?php print $row['image'];?>">
     <?php 
     foreach($err_msg as $value){
-        print $value;
+        print $value.'<br>';
     }?>
      <?php print $massage1.'<br>';?>
      <?php print $massage2.'<br>';?>

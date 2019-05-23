@@ -54,7 +54,7 @@ if($link = mysqli_connect($host, $user, $passwd, $dbname)){
 <?php   foreach ($data as $value) { ?>
             <tr> 
                 <td><img src="./images/<?php print $value['image'];?>"></td> 
-                <td><span><?php print $value['drink_name']; ?></span></td>
+                <td><span><?php print $value['drink_name'].'<br>'; ?></span></td>
                 <td><span><?php print $value['price']; ?>円</span></td>
                 <td>
 <?php   if ($value['quantity'] > '0' ) { ?>
